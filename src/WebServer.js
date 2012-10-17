@@ -16,7 +16,7 @@
     };
 
     var init = function () {
-      var settings = _.extend(settings, configs || {});
+      settings = _.extend(settings, configs || {});
       app.engine('html', ejs.renderFile);
       app.use(express.bodyParser());
       app.use(express.cookieParser(settings.cookieSecret));
