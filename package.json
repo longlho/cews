@@ -1,5 +1,5 @@
 {
-  "name": "sew",
+  "name": "simple-ew",
   "version": "0.1.0",
   "description": "Simple Express Wrapper that has a bunch of dependencies set up already",
   "main": "index.js",
