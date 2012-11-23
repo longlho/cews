@@ -19,6 +19,7 @@
       settings = _.extend(settings, configs || {});
       app.engine('html', ejs.renderFile);
       app.use(express.compress());
+      app.use(express.methodOverride());
       app.use(express.bodyParser());
       app.use(express.cookieParser(settings.cookieSecret));
       app.use(express.session({ secret: settings.cookieSecret, store: new MemoryStore({ reapInterval: 60000 * 10 }) }));
