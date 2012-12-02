@@ -15,7 +15,8 @@ var LogManager = function () {
         {
           type: "console"
         }
-      ]
+      ],
+      replaceConsole: true
     });
   };
 
