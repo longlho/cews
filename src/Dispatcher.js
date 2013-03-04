@@ -1,3 +1,4 @@
+/*jslint laxcomma:true*/
 var http = require('http')
   , util = require('util')
   , events = require('events')
@@ -13,7 +14,7 @@ var Dispatcher = function () {
   // - content: content that will be serialized and sent in the body
   this.submit = function (opts, cb) {
     cb = _.isFunction(cb) ? cb : function () {};
-    
+
     //Resolve RESTful stuff
     opts = opts || {};
     var content;
@@ -41,8 +42,8 @@ var Dispatcher = function () {
     })
     .on('error', cb)
     .end(content);
-  }
-}
+  };
+};
 
 util.inherits(Dispatcher, events.EventEmitter);
 

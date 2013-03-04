@@ -1,3 +1,4 @@
+/*jslint laxcomma:true*/
 (function () {
 
   var express = require('express')
@@ -10,7 +11,7 @@
     var self = this;
 
     var settings = {
-      port: 8080,
+      port: 3000,
       cookieSecret: 'dummy-secret',
       resourceFolder: 'public'
     };
@@ -27,7 +28,7 @@
       app.use(express.static(settings.resourceFolder));
 
       self.settings = settings;
-    }
+    };
 
     this.ejs = ejs;
     this.app = app;
@@ -40,7 +41,7 @@
 
     init();
 
-  }
+  };
 
   module.exports = WebServer;
 

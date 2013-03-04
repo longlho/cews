@@ -24,7 +24,7 @@ var LogManager = function () {
     var logger = log4js.getLogger(filename);
     logger.setLevel('INFO');
     return logger;
-  }
-}
+  };
+};
 
 module.exports = new LogManager();
