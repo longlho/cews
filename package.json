@@ -1,7 +1,7 @@
 {
-  "name": "simple-ew",
+  "name": "cews",
   "version": "0.1.3",
-  "description": "Simple Express Wrapper that has a bunch of dependencies set up already",
+  "description": "Crud Express Web Server that has a bunch of dependencies set up already",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

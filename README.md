@@ -1,4 +1,4 @@
-simple-express-wrapper
+Crud Express Web Server
 ======================
 
-Simple wrapper for express that has a bunch of dependencies, ready for use
+Simple wrapper for NodeJS Express that has a bunch of dependencies, ready for use.
