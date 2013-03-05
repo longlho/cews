@@ -8,7 +8,7 @@ var LogManager = function () {
         {
           type: "file",
           absolute: true,
-          filename: settings.logfile || '/tmp/sew.log',
+          filename: settings.logfile || '/tmp/cews.log',
           maxLogSize: 20480,
           backups: 5
         },

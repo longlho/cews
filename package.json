@@ -18,7 +18,9 @@
     "express" : "~3.0",
     "ejs" : ">=0.8.3",
     "underscore" : ">=1.4.0",
-    "log4js" : ">=0.5.2"
+    "log4js" : ">=0.5.2",
+    "passport": "latest", 
+    "connect-flash": "latest"
   },
   "author": "Long Ho",
   "license": "BSD"
