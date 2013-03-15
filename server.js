@@ -1,15 +1,23 @@
 /*jslint laxcomma:true, expr:true*/
-var server = require('./index')
+var logger = require('log4js').getLogger('Server')
+	, server = require('./index')
 	, webServer = new server.WebServer({
-		port: 8080
+		port: process.env.PORT || 3000,
+		log4js: {
+			level: 'INFO'
+		},
+		cors: {
+			domains: 'localhost'
+		}
 	});
 
-webServer.controllers = {
+webServer.route({
 	get: {
 		'/': function (req, res) {
+			logger.debug('test');
 			res.json({ test:'It works'});
 		}
 	}
-};
+});
 
 webServer.start();

@@ -11,10 +11,11 @@ What it includes:
 - A Dispatcher that handles communication between the WebServer and a 3rd-party RESTful service.
 - `ejs` as templating.
 - `underscore` as utilities.
+- `passport` for talking to 3rd party APIs.
 
 Getting started
 ----
-Check out `sample.js` for sample and configurations.
+Check out `server.js` for sample and configurations.
 
 You can get started with importing the library:
 
@@ -28,9 +29,13 @@ To initialize the server:
 Configurations are passed in the constructor:
 
 	var configs = {
-		port: 3001, //Port to start
-		cookieSecret: 'dummy-secret' //Secret token to encrypt cookie,
-		resourceFolder: 'public' //Should be absolute path to public static resource folder, like css and UI js stuff
+		port: 3001, // Port to start
+		cookieSecret: 'dummy-secret', // Secret token to encrypt cookie,
+		resourceFolder: 'public', // Should be absolute path to public static resource folder, like css and UI js stuff
+		log4js: {}, // Log4js configurations, checkout log4js doc for more details
+		cors: {
+			domains: '*'	// Allow CORS
+		}
 	};
 	var app = new server.WebServer(configs);
 	app.start();
