@@ -1,7 +1,7 @@
 /*jslint laxcomma:true, expr:true*/
 var server = require('./index')
 	, webServer = new server.WebServer({
-		port: 3001
+		port: 8080
 	});
 
 webServer.controllers = {
