@@ -4,7 +4,7 @@
   "description": "Crud Express Web Server that has a bunch of dependencies set up already",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,9 @@
     "log4js" : ">=0.5.2",
     "passport": ">=0.1.16", 
     "connect-flash": ">=0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "latest"
   },
   "author": "Long Ho",
   "license": "BSD"

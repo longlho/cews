@@ -1,4 +1,4 @@
-/*jslint laxcomma:true*/
+/*jslint laxcomma:true, expr:true*/
 (function () {
 
   var express = require('express')
@@ -20,29 +20,42 @@
       resourceFolder: 'public'
     };
 
-    this.settings = _.extend(settings, configs || {});
+    this.settings = _.extend(settings, this.parseConfigs(configs) || {});
     this.app = app;
 
     settings.log4js = settings.log4js || {};
-    //Setup log4js
-    log4js.configure(_.extend({
-      appenders: [
-        {
-          type: "file",
-          absolute: true,
-          filename: '/tmp/cews.log',
-          maxLogSize: 20480,
-          backups: 10
-        },
-        {
-          type: "console"
-        }
-      ],
-      replaceConsole: true
-    }, settings.log4js));
+
+    // For testing purpose
+    if (!settings._disableLogging) {
+      //Setup log4js
+      log4js.configure(_.extend({
+        appenders: [
+          {
+            type: "file",
+            absolute: true,
+            filename: '/tmp/cews.log',
+            maxLogSize: 20480,
+            backups: 10
+          },
+          {
+            type: "console"
+          }
+        ],
+        replaceConsole: true
+      }, settings.log4js));
+      this.logger = log4js.getLogger('CEWS');
+    } else {
+      this.logger = function () {
+        console.log(arguments);
+      };
+    }
+
+
 
     app.configure(function () {
-      app.set('view engine', 'ejs');
+
+      if (self.settings.template)
+        app.set('view engine', 'ejs');
 
       // Use log4js instead
       app.use(log4js.connectLogger(self.logger, { level: settings.log4js.level || 'INFO' }));
@@ -73,7 +86,7 @@
       app.use(express.static(settings.resourceFolder, {maxAge: 31557600000}));
 
       // CSRF protection
-      app.use(express.csrf());
+      settings.csrf && app.use(express.csrf());
 
       // Passport stuff
       app.use(flash());
@@ -83,12 +96,26 @@
   };
 
   WebServer.prototype = {
-    logger: log4js.getLogger('CEWS'),
+    parseConfigs: function (configs) {
+      // JSON object
+      if (_.isObject(configs)) return configs;
+      // File path
+      if (_.isString(configs)) {
+        var fs = require('fs');
+        try {
+          return JSON.parse(fs.readFileSync(configs));
+        } catch (e) {
+          this.logger.warn('Cannot read config file, falling back to default values');
+          this.logger.warn(e);
+        }
+      }
+      return {};
+    },
     models: {},
     controllers: {},
     start: function () {
       var self = this;
-      if (cluster.isMaster) {
+      if (this.settings.cluster && cluster.isMaster) {
         // Fork workers.
         for (var i = 0; i < numCPUs; i++) {
           cluster.fork();
