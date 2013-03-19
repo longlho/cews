@@ -1,5 +1,6 @@
 Crud Express Web Server
 ===
+[![Build Status](https://secure.travis-ci.org/longlho/cews.png)](https://secure.travis-ci.org/longlho/cews)
 
 Simple wrapper for NodeJS Express that has a bunch of dependencies, ready for use.
 
@@ -33,10 +34,10 @@ Configurations are passed in the constructor:
 		cookieSecret: 'dummy-secret', // Secret token to encrypt cookie,
 		resourceFolder: 'public', // Should be absolute path to public static resource folder, like css and UI js stuff
 		log4js: {}, // Log4js configurations, checkout log4js doc for more details
+		csrf: false, // Enable/Disable csrf
 		cors: {
 			domains: '*'	// Allow CORS
 		}
 	};
 	var app = new server.WebServer(configs);
 	app.start();
-	
