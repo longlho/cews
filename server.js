@@ -15,7 +15,9 @@ webServer.route({
 	get: {
 		'/': function (req, res) {
 			logger.debug('test');
-			res.json({ test:'It works'});
+			setTimeout(function () {
+				res.json({ test:'It works'});
+			}, 1000);
 		}
 	}
 });

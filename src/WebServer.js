@@ -54,11 +54,13 @@
 
     app.configure(function () {
 
-      if (self.settings.template)
-        app.set('view engine', 'ejs');
-
       // Use log4js instead
       app.use(log4js.connectLogger(self.logger, { level: settings.log4js.level || 'INFO' }));
+
+      app.use(express.responseTime());
+
+      if (self.settings.template)
+        app.set('view engine', 'ejs');
 
       // Allow CORS
       app.use(cors(settings));
