@@ -44,6 +44,7 @@
         replaceConsole: true
       }, settings.log4js));
       this.logger = log4js.getLogger('CEWS');
+      this.logger.info(settings);
     } else {
       this.logger = function () {
         console.log(arguments);
@@ -79,13 +80,6 @@
 
       // Parse session based on cookieSecret
       app.use(express.session({ secret: settings.cookieSecret }));
-
-      // Use router 1st before static since static does a hard disk check.
-      // Otherwise, do something like `app.get('/static', express.static...)`
-      app.use(app.router);
-
-      // Serve static from resource folder
-      app.use(express.static(settings.resourceFolder, {maxAge: 31557600000}));
 
       // CSRF protection
       settings.csrf && app.use(express.csrf());
@@ -135,6 +129,13 @@
       this.app.listen(this.settings.port);
     },
     route: function (routes) {
+      // Use router 1st before static since static does a hard disk check.
+      // Otherwise, do something like `app.get('/static', express.static...)`
+      app.use(app.router);
+
+      // Serve static from resource folder
+      app.use(express.static(settings.resourceFolder, {maxAge: 31557600000}));
+
       var self = this;
       _.each(routes, function (routes, method) {
         _.each(routes, function (controllerFn, route) {

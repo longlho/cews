@@ -1,6 +1,6 @@
 {
   "name": "cews",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Crud Express Web Server that has a bunch of dependencies set up already",
   "main": "index.js",
   "scripts": {
