@@ -134,7 +134,7 @@
       app.use(app.router);
 
       // Serve static from resource folder
-      app.use(express.static(settings.resourceFolder, {maxAge: 31557600000}));
+      app.use(express.static(this.settings.resourceFolder, {maxAge: 31557600000}));
 
       var self = this;
       _.each(routes, function (routes, method) {
